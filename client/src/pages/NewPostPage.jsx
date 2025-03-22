@@ -97,7 +97,7 @@ function NewPostPage() {
 
         <div className="hello md:w-[30%] flex flex-col items-center justify-center gap-4">
           {images.map((image, index) => (
-            <div key={index} className="w-[90%]">
+            <div key={index} className="w-[90%] shadow-md shadow-gray-300 rounded-lg">
               <img src={image} alt={`Uploaded ${index}`} className="h-60 w-full rounded-lg object-cover" />
             </div>
           ))}

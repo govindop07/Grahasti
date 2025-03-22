@@ -6,9 +6,9 @@ export const listData = [
     bedroom: 2,
     bathroom: 1,
     price: 1000,
-    address: "456 Park Avenue, London",
-    latitude: 51.5074,
-    longitude: -0.1278,
+    address: "Connaught Place, Delhi",
+    latitude: 28.7041, // Delhi
+    longitude: 77.1025,
   },
   {
     id: 2,
@@ -17,9 +17,9 @@ export const listData = [
     bedroom: 3,
     bathroom: 2,
     price: 1500,
-    address: "789 Oxford Street, London",
-    latitude: 52.4862,
-    longitude: -1.8904,
+    address: "C-Scheme, Jaipur",
+    latitude: 27.1767, // Jaipur
+    longitude: 78.0081,
   },
   {
     id: 3,
@@ -28,9 +28,9 @@ export const listData = [
     bedroom: 1,
     bathroom: 1,
     price: 800,
-    address: "101 Baker Street, London",
-    latitude: 53.4808,
-    longitude: -2.2426,
+    address: "Golf Course Road, Gurugram",
+    latitude: 28.4595, // Gurugram
+    longitude: 77.0266,
   },
   {
     id: 4,
@@ -39,9 +39,9 @@ export const listData = [
     bedroom: 2,
     bathroom: 1,
     price: 1000,
-    address: "234 Kingsway, London,",
-    latitude: 53.8008,
-    longitude: -1.5491,
+    address: "Lashkar, Gwalior",
+    latitude: 26.2183, // Gwalior
+    longitude: 78.1828,
   },
   {
     id: 5,
@@ -50,9 +50,9 @@ export const listData = [
     bedroom: 3,
     bathroom: 2,
     price: 1500,
-    address: "567 Victoria Road, London",
-    latitude: 53.4084,
-    longitude: -2.9916,
+    address: "Shastri Nagar, Meerut",
+    latitude: 28.9845, // Meerut
+    longitude: 77.7064,
   },
   {
     id: 6,
@@ -61,9 +61,9 @@ export const listData = [
     bedroom: 1,
     bathroom: 1,
     price: 800,
-    address: "890 Regent Street, London",
-    latitude: 54.9783,
-    longitude: -1.6174,
+    address: "Dampier Nagar, Mathura",
+    latitude: 27.4925, // Mathura
+    longitude: 77.6720,
   },
   {
     id: 7,
@@ -72,9 +72,9 @@ export const listData = [
     bedroom: 2,
     bathroom: 1,
     price: 1000,
-    address: "112 Piccadilly, London",
-    latitude: 53.3811,
-    longitude: -1.4701,
+    address: "Tajganj, Agra",
+    latitude: 27.5330, // Agra
+    longitude: 78.0035,
   },
   {
     id: 8,
@@ -83,11 +83,13 @@ export const listData = [
     bedroom: 3,
     bathroom: 2,
     price: 1500,
-    address: "8765 Main High Street, London",
-    latitude: 51.4545,
-    longitude: -2.5879,
+    address: "Nai Sarak, Bharatpur",
+    latitude: 27.1500, // Bharatpur
+    longitude: 77.5036,
   },
 ];
+
+
 
 export const singlePostData = {
   id: 1,
@@ -102,8 +104,8 @@ export const singlePostData = {
   bedRooms: 2,
   bathroom: 1,
   size: 861,
-  latitude: 51.5074,
-  longitude: -0.1278,
+  latitude: 27.5811,
+  longitude: 77.6966,
   city: "London",
   address: "1234 Broadway St",
   school: "250m away",
