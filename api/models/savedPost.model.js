@@ -5,12 +5,12 @@ const SavedPostSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'user', 
+      ref: 'User', 
     },
     postId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'post', 
+      ref: 'Post', 
     },
   },
   {

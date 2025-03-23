@@ -83,11 +83,13 @@ export const savePost = async (req, res) => {
 };
 
 export const profilePosts = async (req, res) => {
-  const tokenUserId = req.params.userId;
+  const tokenUserId = req.userId;
   try {
     const userPosts = await Post.find({userId: tokenUserId});
 
-    const saved = await SavedPost.find({userId: tokenUserId}).populate("postId")
+    const saved = await SavedPost.find({userId: tokenUserId}).populate({
+      path: "postId",
+    });
 
     const savedPosts = saved.map((item) => item.postId)
     res.status(200).json({ userPosts, savedPosts});
