@@ -7,16 +7,16 @@ import { IoLocationOutline } from "react-icons/io5";
 function Card({ item }) {
   return (
     <div className="border rounded-lg shadow-md hover:shadow-lg overflow-hidden transition-shadow duration-300 mb-5">
-      {/* Image Section */}
-      <Link to={`/${item.id}`} className="block">
+
+      <Link to={`/${item._id}`} className="block">
         <img
-          src={item.img}
+          src={item.images[0]}
           alt={item.title}
           className="w-full h-48 object-cover"
         />
       </Link>
 
-      {/* Text Section */}
+
       <div className="p-4">
         <h2 className="text-lg font-semibold mb-2">
           <Link to={`/${item.id}`} className="hover:text-blue-500">

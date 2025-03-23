@@ -16,6 +16,9 @@ const postSchema = new Schema(
       type: Number,
       required: true,
     },
+    Description:{
+      type: String,
+    },
     images: {
       type: [String],
       required: true,
@@ -59,6 +62,12 @@ const postSchema = new Schema(
       ref: "user", 
       required: true,
     },
+    savedPosts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SavedPost',
+      },
+    ],
   },
   { timestamps: true }
 );

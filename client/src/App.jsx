@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProfileUpdatePage from "./pages/ProfileUpdatePage";
 import NewPostPage from "./pages/NewPostPage";
+import { listPageLoader, singlePageLoader } from "./lib/loaders";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,11 +24,13 @@ function App() {
         },
         {
           path:'/list',
-          element: <ListPage />
+          element: <ListPage />,
+          loader: listPageLoader,
         },
         {
           path:'/:id',
-          element:<SinglePage />
+          element:<SinglePage />,
+          loader: singlePageLoader,
         },
         {
           path: '/login',

@@ -23,7 +23,7 @@ function Slider({ images }) {
   return (
     <div className="w-full h-[350px] flex justify-center md:gap-5 min-h[350px]">
       {imageIndex !== null && (
-        <div className="absolute h-full w-full z-20 top-0 left-0 bg-black flex items-center justify-between gap-6">
+        <div className="absolute w-full z-[99999] top-0 left-0 bg-black flex items-center justify-between gap-6">
           <div className="md:flex-1 flex items-center justify-center cursor-pointer" onClick={() => changeSlide("left")}>
             <img src="arrow.png" className="w-5 md:w-10 ml-2 md:ml-8"/>
           </div>
@@ -42,12 +42,12 @@ function Slider({ images }) {
       <div className="flex sm:flex-row flex-col gap-4 min-h[350px]">
 
         <div className="">
-          <img src={images[0]} alt="" onClick={() => setImageIndex(0)} className="h-[250px] w-full sm:w-full sm:h-full object-cover rounded-lg cursor-pointer"/>
+          <img src={images[0]} alt="" onClick={() => setImageIndex(0)} className="h-[250px] w-[450px] sm:w-[500px] sm:h-[350px] object-cover rounded-lg cursor-pointer shadow-md shadow-gray-400"/>
         </div>
         <div className=" flex sm:flex-col justify-between sm:gap-5 gap-2">
           {images.slice(1).map((image, index) => (
             <img
-            className="w-full object-cover rounded-lg cursor-pointer h-[70px] sm:h-[100px]"
+            className="w-[230px] object-cover rounded-lg cursor-pointer h-[70px] sm:h-[100px]"
             src={image}
             alt=""
             key={index}

@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import User from "../models/user.model.js";
+import SavedPost from '../models/savedPost.model.js';
 
 export const getUser = async (req, res) => {
   const id = req.params._id;
@@ -53,5 +54,29 @@ export const updateUser = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Failed to update user!" });
+  }
+};
+
+export const savePost = async (req, res) => {
+  const postId = req.body.postId;
+  const tokenUserId = req.userId;
+
+  try {
+    const savedPost = await SavedPost.findOne({ userId: tokenUserId, postId });
+
+    if (savedPost) {
+      await SavedPost.deleteOne({ _id: savedPost._id });
+      res.status(200).json({ message: "Post removed from saved list" });
+    } else {
+      const newSavedPost = new SavedPost({
+        userId: tokenUserId,
+        postId,
+      });
+      await newSavedPost.save();
+      res.status(200).json({ message: "Post saved" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to save or remove post!" });
   }
 };

@@ -1,8 +1,22 @@
 import Post from "../models/post.model.js";
+import jwt from "jsonwebtoken";
+import SavedPost from "../models/savedPost.model.js";
 
 export const getPosts = async (req, res) => {
+  const query = req.query;
   try {
-    const posts = await Post.find();
+    const filters = {
+      ...(query.city ? { city: query.city } : {}),
+      ...(query.type ? { type: query.type } : {}),
+      ...(query.property ? { property: query.property } : {}),
+      ...(query.bedroom ? { bedroom: parseInt(query.bedroom) } : {}),
+      ...(query.minPrice || query.maxPrice
+        ? { price: { ...(query.minPrice ? { $gte: parseInt(query.minPrice) } : {}), ...(query.maxPrice ? { $lte: parseInt(query.maxPrice) } : {}) } }
+        : {}),
+    };
+    
+    const posts = await Post.find(filters);
+    
     res.status(200).json(posts);
     
   } catch (error) {
@@ -10,22 +24,42 @@ export const getPosts = async (req, res) => {
     res.status(500).json({ message: "Failed to get posts" });
   }
 }
+
 export const getPost = async (req, res) => {
-  const id = req.params._id;
+  const id = req.params.id;
+
   try {
-    const post = await Post.findOne(id)
-  .populate({
-    path: "userId",
-    select: "username avatar",
-  });
-  console.log(post)
-    res.status(200).json(post);
+    const post = await Post.findOne({ _id: id }).populate({
+      path: "userId",
+      select: "username avatar",
+    });
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const token = req.cookies?.token;
+
+    // if (token) {
+    //   jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
+    //     if (!err) {
+    //       const saved = await SavedPost.findOne({
+    //         postId: id,
+    //         userId: payload.id
+    //       })
+
+    //       return res.status(200).json({ ...post.toObject(), isSaved: saved ? true : false });
+    //     }
+    //   });
+    // }
+    res.status(200).json({ ...post.toObject(), isSaved: false });
 
   } catch (error) {
-    console.log(error.response);
+    console.error("Error fetching post:", error);
     res.status(500).json({ message: "Failed to get post" });
   }
-}
+};
+
 export const addPost = async (req, res) => {
   const body = req.body;
   const tokenUserId = req.userId;

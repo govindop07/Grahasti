@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import UploadWidget from "../components/UploadWidget";
 import axiosInstance from "../lib/axios.js";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ function NewPostPage() {
       });
       console.log("Post submitted successfully:", res.data);
       showToast('success', "Post added succefully");
-      navigate("/"+res.data.id);
+      navigate("/"+res.data._id);
     } catch (error) {
       showToast('error', "Something went wrong");
       console.error("Submission error:", error.response);
@@ -47,9 +47,9 @@ function NewPostPage() {
                 <label htmlFor="address" className="font-semibold text-gray-600">Address</label>
                 <input id="address" name="address" type="text" className="p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" />
               </div>
-              <div className="item description w-full">
-                <label htmlFor="desc" className="font-semibold text-gray-600">Description</label>
-                <textarea id="desc" name="desc" className="p-4 rounded-lg w-full h-40 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
+              <div className="item w-full">
+                <label htmlFor="Description" className="font-semibold text-gray-600">Description</label>
+                <textarea id="Description" name="Description" className="p-4 rounded-lg w-full h-40 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
               </div>
               <div className="item flex flex-col gap-2 sm:w-1/4">
                 <label htmlFor="city" className="font-semibold text-gray-600">City</label>

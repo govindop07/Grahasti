@@ -1,13 +1,35 @@
+import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
+import { useSearchParams } from "react-router-dom";
 
 function Filter() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState({
+    type: searchParams.get("type") || "",
+    city: searchParams.get("city") || "",
+    property: searchParams.get("property") || "",
+    minPrice: searchParams.get("minPrice") || "",
+    maxPrice: searchParams.get("maxPrice") || "",
+    bedroom: searchParams.get("bedroom") || "",
+  });
+
+  const handleChange = (e) => {
+    setQuery({
+      ...query,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFilter = () => {
+    setSearchParams(query);
+  };
+
   return (
     <div className="p-4">
       <p className="text-2xl mb-4 font-light">
-        Search results for <b>London</b>
+        Search results for <b>{searchParams.get('city')}</b>
       </p>
 
-      {/* Location Input */}
       <div className="flex flex-col w-full mb-4">
         <label htmlFor="city" className="text-xs mb-1">Location</label>
         <input
@@ -15,17 +37,20 @@ function Filter() {
           id="city"
           name="city"
           placeholder="City Location"
+          onChange={handleChange}
+          defaultValue={query.city}
           className="border border-gray-300 p-2 rounded-md w-full"
         />
       </div>
 
-      {/* Filter Section */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-4">
         <div className="flex flex-col">
           <label htmlFor="type" className="text-xs mb-1">Type</label>
           <select
             name="type"
             id="type"
+            onChange={handleChange}
+            defaultValue={query.type}
             className="border border-gray-300 p-2 rounded-md"
           >
             <option value="">Any</option>
@@ -39,6 +64,8 @@ function Filter() {
           <select
             name="property"
             id="property"
+            onChange={handleChange}
+            defaultValue={query.property}
             className="border border-gray-300 p-2 rounded-md"
           >
             <option value="">Any</option>
@@ -56,6 +83,8 @@ function Filter() {
             id="minPrice"
             name="minPrice"
             placeholder="Any"
+            onChange={handleChange}
+            defaultValue={query.minPrice}
             className="border border-gray-300 p-2 rounded-md"
           />
         </div>
@@ -67,6 +96,8 @@ function Filter() {
             id="maxPrice"
             name="maxPrice"
             placeholder="Any"
+            onChange={handleChange}
+            defaultValue={query.maxPrice}
             className="border border-gray-300 p-2 rounded-md"
           />
         </div>
@@ -76,6 +107,8 @@ function Filter() {
           <select
             name="bedroom"
             id="bedroom"
+            onChange={handleChange}
+            defaultValue={query.bedroom}
             className="border border-gray-300 p-2 rounded-md"
           >
             <option value="">Any</option>
@@ -88,9 +121,8 @@ function Filter() {
         </div>
       </div>
 
-      {/* Search Button */}
       <div className="flex justify-end">
-        <button className="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-md flex items-center gap-2">
+        <button onClick={handleFilter} className="bg-yellow-400 cursor-pointer hover:bg-yellow-500 px-4 py-2 rounded-md flex items-center gap-2">
           <IoSearch />
           <span>Search</span>
         </button>
