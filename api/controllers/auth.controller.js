@@ -1,4 +1,4 @@
-import bcrypt, { hash } from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import User from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
 
@@ -23,7 +23,7 @@ export const register = async (req, res) => {
     const newUser = new User({
       username,
       email,
-      avatar,
+      avatar:"",
       password: hashedPassword,
     })
 

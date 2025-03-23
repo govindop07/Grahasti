@@ -38,21 +38,20 @@ export const getPost = async (req, res) => {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    const token = req.cookies?.token;
+    const token = req.cookies?.jwt;
+    let isSaved = false;
 
-    // if (token) {
-    //   jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
-    //     if (!err) {
-    //       const saved = await SavedPost.findOne({
-    //         postId: id,
-    //         userId: payload.id
-    //       })
+    if(token){
+        const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const saved = await SavedPost.findOne({
+          postId: id,
+          userId: payload.id,
+        });
 
-    //       return res.status(200).json({ ...post.toObject(), isSaved: saved ? true : false });
-    //     }
-    //   });
-    // }
-    res.status(200).json({ ...post.toObject(), isSaved: false });
+        isSaved = !!saved;
+    }
+    
+    res.status(200).json({ ...post.toObject(), isSaved: isSaved });
 
   } catch (error) {
     console.error("Error fetching post:", error);

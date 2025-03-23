@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import User from "../models/user.model.js";
 import SavedPost from '../models/savedPost.model.js';
+import Post from '../models/post.model.js';
 
 export const getUser = async (req, res) => {
   const id = req.params._id;
@@ -80,3 +81,19 @@ export const savePost = async (req, res) => {
     res.status(500).json({ message: "Failed to save or remove post!" });
   }
 };
+
+export const profilePosts = async (req, res) => {
+  const tokenUserId = req.params.userId;
+  try {
+    const userPosts = await Post.find({userId: tokenUserId});
+
+    const saved = await SavedPost.find({userId: tokenUserId}).populate("postId")
+
+    const savedPosts = saved.map((item) => item.postId)
+    res.status(200).json({ userPosts, savedPosts});
+
+  } catch (error) {
+    console.log(error.respone);
+    res.status(500).json({ message: "error in get profilePosts controller" });
+  }
+}

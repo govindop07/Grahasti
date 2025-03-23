@@ -5,12 +5,12 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import axiosInstance from "../lib/axios.js";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { showToast } from '../lib/showToast.js'
 
 function SinglePage() {
   const post = useLoaderData();
   const [saved, setSaved] = useState(post.isSaved);
   const navigate = useNavigate();
-  console.log(post)
   const { currentUser } = useContext(AuthContext);
   
   const handleSave = async() => {
@@ -23,9 +23,11 @@ function SinglePage() {
         postId: post._id
       })
       setSaved((prev) => !prev);
-      
+      showToast('success', `${saved? "Post Unsaved": "Post Saved"}`);
+
     } catch (error) {
       console.log(error);
+      showToast('error', "Something went wrong");
       setSaved((prev) => !prev);
     }
   }
@@ -48,7 +50,7 @@ function SinglePage() {
                 <span>{post.address}</span>
               </div>
               <div className="p-1 bg-amber-300 rounded-md text-lg font-light w-max">
-                $ {post.price}
+                ₹ {post.price}
               </div>
             </div>
 

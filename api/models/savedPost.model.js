@@ -20,6 +20,6 @@ const SavedPostSchema = new mongoose.Schema(
 
 SavedPostSchema.index({ userId: 1, postId: 1 }, { unique: true });
 
-const savedPost = mongoose.model('savedPost', SavedPostSchema);
+const SavedPost = mongoose.model('SavedPost', SavedPostSchema);
 
-export default savedPost;
+export default SavedPost;

@@ -24,19 +24,19 @@ const userSchema = new mongoose.Schema(
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "post",
+        ref: "Post",
       },
     ],
     savedPosts: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'savedPost',
+        ref: 'SavedPost',
       },
     ],
   },
   { timestamps: true }
 );
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

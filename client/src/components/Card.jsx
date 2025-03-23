@@ -29,7 +29,7 @@ function Card({ item }) {
           {item.address}
         </p>
 
-        <p className="text-xl font-bold text-yellow-500 mb-4">$ {item.price}</p>
+        <p className="text-xl font-bold text-yellow-500 mb-4">₹ {item.price}</p>
 
         <div className="flex justify-between items-center">
           {/* Features */}
