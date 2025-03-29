@@ -32,7 +32,6 @@ function Card({ item }) {
         <p className="text-xl font-bold text-yellow-500 mb-4">₹ {item.price}</p>
 
         <div className="flex justify-between items-center">
-          {/* Features */}
           <div className="flex gap-4">
             <div className="flex items-center text-sm text-gray-600">
               <MdOutlineBedroomParent className="h-4 w-4 mr-1" />
@@ -44,11 +43,10 @@ function Card({ item }) {
             </div>
           </div>
 
-          {/* Action Icons */}
           <div className="flex gap-4">
-            <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 cursor-pointer">
+            {/* <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 cursor-pointer">
               <img src="./save.png" alt="save icon" className="h-5 w-5" />
-            </button>
+            </button> */}
             <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 cursor-pointer">
               <BsChatLeftText alt="chat icon" className="h-5 w-5" />
             </button>

@@ -1,45 +1,62 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
+import axiosInstance from "../lib/axios";
 
-function Chat() {
-  const [chat, setChat] = useState(true);
+function Chat({chats}) {
+  const [chat, setChat] = useState(null);
+  const { currentUser } = useContext(AuthContext);
+  console.log(chats);
+
+  const handleOpenChat = async (_id, receiver)=>{
+    try {
+      const res = await axiosInstance.get("/chats/"+_id);
+      setChat({ ...res, receiver });
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="flex flex-col h-[90vh] p-4 bg-gray-50">
-      {/* Messages List */}
-      <div className=" overflow-y-auto">
+      <div className="overflow-y-auto">
         <h1 className="text-2xl font-bold mb-4">Messages</h1>
-        {[...Array(6)].map((_, index) => (
+
+        {
+          chats.map((c) => (
           <div
-            className="flex items-center gap-4 mb-4 p-4 bg-white rounded-md shadow-md hover:shadow-lg transition-shadow duration-300"
-            key={index}
+            className="flex items-center cursor-pointer gap-4 mb-4 p-4 bg-white rounded-md shadow-md hover:shadow-lg transition-shadow duration-300"
+            style={{
+              backgroundColor: c.seenBy.includes(currentUser._id)? "white": "#fecd514e"
+            }}
+            key={c._id}
+            onClick={() => handleOpenChat(c._id, c.receiver)}
           >
             <img
-              src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src={c.receiver.avatar || "noavatar.jpg"}
               alt="User"
               className="h-10 w-10 rounded-full object-cover"
             />
             <div className="flex-1">
-              <span className="block font-medium text-gray-800">John Doe</span>
+              <span className="block font-medium text-gray-800">{c.receiver.username}</span>
               <p className="text-sm text-gray-600 truncate">
-                Lorem ipsum dolor sit amet...
+                {c.lastMessage}
               </p>
             </div>
           </div>
-        ))}
+          ))
+        }
       </div>
 
-      {/* Chat Box */}
       {chat && (
-        <div className="flex flex-col h-1/2 flex-grow bg-white border-t-2 border-gray-100 shadow-md rounded-lg p-2">
-          {/* Chat Header */}
-          <div className="flex justify-between">
-            <div className="flex items-center gap-4 pb-2">
+        <div className="flex flex-col h-[92%] flex-grow bg-white border-t-2 border-gray-100 shadow-md rounded-lg p-2">
+          <div className="flex justify-between items-center h-24 px-2 -m-2 mb-1 bg-amber-300 rounded-sm shadow-gray-300 shadow-sm">
+            <div className="flex items-center gap-4">
               <img
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src={ chat.receiver.avatar || "noavatar.jpg" }
                 alt="User"
                 className="h-10 w-10 rounded-full object-cover"
               />
-              <span className="font-medium text-lg text-gray-800">John Doe</span>
+              <span className="font-medium text-lg text-gray-800">{chat.receiver.username}</span>
             </div>
             <span
               onClick={() => setChat(false)}
@@ -49,23 +66,22 @@ function Chat() {
             </span>
           </div>
 
-          {/* Chat Messages */}
           <div className="flex flex-col flex-grow overflow-y-auto space-y-4 mb-4">
-            {[...Array(10)].map((_, index) => (
+            {chat.messages.map((message) => (
               <div
                 className={`flex flex-col ${
-                  index % 2 === 0 ? "self-start" : "self-end text-right"
+                  message.userId === currentUser._id ? "self-start" : "self-end text-right"
                 }`}
-                key={index}
+                key={message._id}
               >
                 <p
                   className={`py-2 px-4 rounded-lg ${
-                    index % 2 === 0
+                    currentUser._id === message.userId
                       ? "bg-gray-100 text-gray-800"
                       : "bg-blue-500 text-white"
                   }`}
                 >
-                  Lorem ipsum dolor sit amet
+                  {message.text}
                 </p>
                 <span className="text-xs text-gray-500 mt-1">
                   1 hour ago
@@ -74,13 +90,12 @@ function Chat() {
             ))}
           </div>
 
-          {/* Chat Input */}
           <div className="flex items-center gap-2">
             <input
               placeholder="Type a message..."
               className="flex-grow border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             ></input>
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            <button className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
               Send
             </button>
           </div>

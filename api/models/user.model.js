@@ -33,6 +33,12 @@ const userSchema = new mongoose.Schema(
         ref: 'SavedPost',
       },
     ],
+    chats: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Chat',
+      },
+    ],
   },
   { timestamps: true }
 );

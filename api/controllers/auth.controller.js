@@ -9,6 +9,18 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
+    if (!usernameRegex.test(username)) {
+      return res.status(400).json({ 
+        message: "Username can only contain letters and numbers" 
+      });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+
     if (password.length < 6) {
       return res.status(400).json({ message: "Password must be at least 6 characters" });
     }

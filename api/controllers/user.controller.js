@@ -29,7 +29,7 @@ export const updateUser = async (req, res) => {
     // if(user.username === inputs.username) return res.status(200).json({ message: "Profile Updated Successfullyyyy" });
     const usernameAlreadyExists = await User.findOne({ username: inputs.username })
     if(usernameAlreadyExists) return res.status(403).json({ message: "Username already exist"});
-    // console.log('us', user);
+    // console.log('test', user);
 
     if (password) {
       updatedPassword = await bcrypt.hash(password, 10);

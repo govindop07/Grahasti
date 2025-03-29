@@ -12,6 +12,11 @@ export const listPageLoader = async ({request, params}) => {
 }
 
 export const profilePageLoader = async () => {
-  const res = await axiosInstance("/users/profilePosts");
-  return res.data; 
+  const userResponse = await axiosInstance("/users/profilePosts");
+  const chatResponse = await axiosInstance("/chats");
+
+  return { 
+    posts: userResponse.data, 
+    chats: chatResponse.data,
+  }; 
 }

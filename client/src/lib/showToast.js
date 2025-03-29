@@ -1,10 +1,7 @@
-import { toast as notify } from "react-toastify"; // Renaming to avoid conflict
+import { toast as notify } from "react-toastify";
 
 export const showToast = (type, message) => {
 
-  // if (typeof window !== "undefined" && window.innerWidth < 480) {
-  //   return; // Do not display the toast on mobile
-  // }
   const config = {
     position: "bottom-right",
     autoClose: 3000,

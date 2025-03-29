@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Navbar from '../components/Navbar'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 
 const Layout = () => {

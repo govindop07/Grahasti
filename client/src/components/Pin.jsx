@@ -5,10 +5,10 @@ function Pin({ item }) {
   return (
     <Marker position={[item.latitude, item.longitude]}>
       <Popup>
-        <div className="flex gap-5">
-          <img src={item.img} alt="" className="h-[65px] w-[50px] rounded-sm object-cover"/>
-          <div className="flex flex-col justify-between">
-            <Link to={`/${item.id}`}>{item.title}</Link>
+        <div className="flex gap-4 pr-10">
+          <img src={item.images[0]} alt="" className="h-[65px] w-[50px] rounded-sm object-cover"/>
+          <div className="flex flex-col justify-between w-30 ">
+            <Link to={`/${item._id}`} className="w-30">{item.title}</Link>
             <span>{item.bedroom} bedroom</span>
             <b>$ {item.price}</b>
           </div>

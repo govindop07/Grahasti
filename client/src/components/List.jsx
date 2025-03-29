@@ -1,11 +1,12 @@
 import Card from './Card'
 import {listData} from '../lib/dummyData.js'
 
-function List(){
+function List({posts}){
+  // console.log(posts)
   return (
     <div className='list'>
-      {listData.map(item=>(
-        <Card key={item.id} item={item}/>
+      {posts.map(item=>(
+        <Card key={item._id} item={item}/>
       ))}
     </div>
   )
