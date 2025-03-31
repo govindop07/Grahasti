@@ -18,16 +18,19 @@ export const addMessage = async (req, res) => {
       chatId,
       userId: tokenUserId,
     })
-    await message.save();
+    const newMessage = await message.save();
 
-    chat.seenBy = [tokenUserId];
-    chat.lastMessage = text;
-    await chat.save();
+    await Chat.findByIdAndUpdate(chatId, {
+      $push: { messages: newMessage },
+      $set: {
+        seenBy: [tokenUserId],
+        lastMessage: text,
+      },
+    });
 
     res.status(200).json(message);
-
   } catch (error) {
-    console.log(error.respone);
+    console.log(error);
     res.status(500).json({ message: "Failed to add message" });
   }
 }

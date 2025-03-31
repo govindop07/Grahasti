@@ -12,6 +12,7 @@ const ChatSchema = new Schema(
     userIDs: [
       {
         type: Schema.Types.ObjectId,
+        ref: "User",
       },
     ],
     seenBy: [
