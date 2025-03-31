@@ -35,12 +35,10 @@ function SinglePage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const text = formData.get("text");
-    console.log("Message Text:", text);
   
     try {
       const chatRes = await axiosInstance.post("/chats", { recieverId: post.userId._id });
-  
-      if (chatRes.data.message === "Chat already exists") {
+      if (chatRes?.data?.message === "chat already exists") {
         showToast("success", "Chat already created");
         showToast("success", "Visit Profile page");
         return;

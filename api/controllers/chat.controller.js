@@ -60,7 +60,7 @@ export const addChat = async (req, res) => {
   const tokenUserId = req.userId;
   try {
     const chatExist = await Chat.findOne({
-      userIDs: { $all: [tokenUserId, req.body.recieverId] }, // Ensures both users are present in the array
+      userIDs: { $all: [tokenUserId, req.body.recieverId] },
     });
 
     if(chatExist) return res.status(200).json({message: "chat already exists"});

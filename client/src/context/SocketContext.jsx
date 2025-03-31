@@ -9,12 +9,16 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:4000");
+    const newSocket = io("http://localhost:4000", {
+      // You can add additional options here if needed.
+    });
     setSocket(newSocket);
   }, []);
 
   useEffect(() => {
-    currentUser && socket?.emit("newUser", currentUser._id);
+    if (currentUser && socket) {
+      socket.emit("newUser", currentUser._id);
+    }
   }, [currentUser, socket]);
 
   return (

@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProfileUpdatePage from "./pages/ProfileUpdatePage";
 import NewPostPage from "./pages/NewPostPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
+import VerifyOTP from "./pages/VerifyOTP";
 
 function App() {
   const router = createBrowserRouter([
@@ -40,6 +41,10 @@ function App() {
           path: '/register',
           element: <Register />
         },
+        {
+          path: "/verify-token",
+          element: <VerifyOTP />
+        }
       ]
     },
     {

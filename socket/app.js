@@ -40,6 +40,10 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("newNotification", (data) => {
+    useNotificationStore.getState().increase();
+  });  
+
   socket.on("disconnect", () => {
     removeUser(socket.id);
   });
