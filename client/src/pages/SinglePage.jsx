@@ -16,6 +16,8 @@ function SinglePage() {
   const handleSave = async () => {
     if (!currentUser) {
       navigate("/login");
+      showToast("error","You should be logged in")
+      return;
     }
 
     try {
@@ -35,6 +37,12 @@ function SinglePage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const text = formData.get("text");
+
+    if (!currentUser) {
+      navigate("/login");
+      showToast("error","You should be logged in")
+      return;
+    }
   
     try {
       const chatRes = await axiosInstance.post("/chats", { recieverId: post.userId._id });

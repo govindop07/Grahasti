@@ -24,6 +24,14 @@ function Login() {
         password
       });
 
+      if(res.data.message  == "verify email"){
+        showToast('error', "You have to verify your email first");
+        navigate("/verify-token");
+        return;
+      }
+
+      console.log(res.data);
+
       updateUser(res.data);
       showToast('success', "Login successful!");
       navigate('/');
@@ -63,12 +71,17 @@ function Login() {
           >
             {isLoading? 'Loading...' : 'Login'}
           </button>
-          <Link
-            to="/register"
-            className="block text-center text-blue-500 hover:text-blue-700 text-sm"
+          <div
+            
+            className="flex justify-center gap-1 text-center"
           >
-            Don’t have an account? Sign up
-          </Link>
+            Don't have an account? 
+            <Link 
+            to="/register"
+            className=" text-blue-500 hover:text-blue-700">
+              Sign up
+            </Link>
+          </div>
         </form>
       </div>
     </div>

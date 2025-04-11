@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProfileUpdatePage from "./pages/ProfileUpdatePage";
 import NewPostPage from "./pages/NewPostPage";
-import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
+import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders.js";
 import VerifyOTP from "./pages/VerifyOTP";
 
 function App() {

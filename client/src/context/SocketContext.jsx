@@ -10,7 +10,6 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     const newSocket = io("http://localhost:4000", {
-      // You can add additional options here if needed.
     });
     setSocket(newSocket);
   }, []);

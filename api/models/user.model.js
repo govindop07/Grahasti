@@ -21,6 +21,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    otp: {
+      type: Number,
+      default: null,
+    },
+    otpCreatedAt: {
+      type: Date,
+      default: null,
+    },
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,

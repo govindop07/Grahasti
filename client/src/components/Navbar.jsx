@@ -11,27 +11,18 @@ const Navbar = () => {
   const fetchNotifications = useNotificationStore((state) => state.fetch);
   const number = useNotificationStore((state) => state.number);
 
-  // Fetch notifications once when currentUser becomes available.
   useEffect(() => {
     if (currentUser) {
       fetchNotifications();
     }
-    // It is important that fetchNotifications be stable (or wrapped in useCallback)
-    // so that it doesn’t trigger this effect continuously.
   }, [currentUser, fetchNotifications]);
 
-  // Listen for real-time notification events from the server.
   useEffect(() => {
     if (socket && currentUser) {
       socket.on("newNotification", (data) => {
-        // Option A: Refetch the updated notification count from your backend
         fetchNotifications();
-
-        // Option B: If you opt for an optimistic UI update, simply use:
-        // useNotificationStore.getState().increase();
       });
 
-      // Cleanup the socket event listener on unmount or on dependency change.
       return () => {
         socket.off("newNotification");
       };
