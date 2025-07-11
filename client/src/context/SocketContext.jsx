@@ -9,7 +9,7 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:4000", {
+    const newSocket = io("https://grahasti-backend.onrender.com", {
     });
     setSocket(newSocket);
   }, []);
